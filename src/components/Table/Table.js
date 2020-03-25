@@ -24,19 +24,23 @@ export default function Table() {
     onTableHeaderClick: handleTableHeaderClick
   };
 
-  let sortedData = data;
+  let sortedData = [...data];
   switch (sortBy) {
     case "Name":
-      
+      sortedData = sortedData.sort((a, b) => {
+        const aName = `${a.name.first} ${a.name.last}`;
+        const bName = `${b.name.first} ${b.name.last}`;
+        return aName.localeCompare(bName);
+      })
       break;
     case "Email":
-      sortedData = data.sort((a, b) => a.email.localeCompare(b.email))
+      sortedData = sortedData.sort((a, b) => a.email.localeCompare(b.email))
       break;
     case "Phone":
-      sortedData = data.sort((a, b) => a.phone.localeCompare(b.phone))
+      sortedData = sortedData.sort((a, b) => a.phone.localeCompare(b.phone))
       break;
     case "Nationality":
-      sortedData = data.sort((a, b) => a.nat.localeCompare(b.nat))
+      sortedData = sortedData.sort((a, b) => a.nat.localeCompare(b.nat))
       break;
   
     default:
